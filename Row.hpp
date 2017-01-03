@@ -3,22 +3,17 @@
 #include <math.h>
 #include <iostream>
 #include <fstream>
+#include "Enum_Columns.cpp"
 using namespace std;
 
-class Rows{
+class Row{
     public:
-    int max_key_length;    //Max Length of a Key
-    int table_size;    //Size of the hash table
-    int double_hashing;
-    int filled_cells;
-    int collisions;
-    int* Collisions_Index;
-    int* Filled;
-    int* Collisions_Filled;
-    string* hash_table;
+    string* col_list;
 
     int hash_function(const char *key);
-    double table_load();
+    int add(columns col_num, string value);
+    Row();
+
     HashTable(int MAX_KEY_LENGTH, int HASH_TABLE_SIZE_M, int DOUBLE_HASHING);
     ~HashTable();
 };

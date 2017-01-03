@@ -1,0 +1,46 @@
+//client detailed
+    string C_Customer_Name;
+    string C_Site_Name;
+    string C_Customer_Code;
+    string C_Date
+    string C_Transaction_type
+    string C_Process_type
+    string C_Quantity
+    string C_ID_Processed
+    string C_Total_Notes
+    string C_Total_Coins
+    string C_Total_Cash
+    string C_500
+    string C_200
+    string C_100
+    string C_50
+    string C_20
+    string C_10
+    string C_5
+    string C_2
+    string C_1
+    string C_50c
+    string C_20c
+    string C_10c
+    string C_5c
+    string C_2c
+    string C_1c
+    string C_Mixed Coin
+    string C_BIC
+    string C_IBAN
+    string C_PAYDAY
+
+//dynamic trans
+    string D_Client_Location
+    string D_Site_No
+    string D_Deposit_Date
+    string D_Ref_Num_PIS
+    string D_STC
+    string D_Cheques
+    string D_GBP
+    string D_Euro_Notes_Total
+    string D_Euro_Coin_Total
+    string D_Cash_Total
+    string D_Bag
+    string D_Difference
+    string D_Comments

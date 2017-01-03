@@ -3,7 +3,13 @@
 #include <math.h>
 #include <iostream>
 #include <fstream>
+//#include "Row.hpp"
 using namespace std;
+
+struct Node{
+    string key;
+    int index;
+}
 
 class HashTable{
     public:
@@ -15,10 +21,10 @@ class HashTable{
     int* Collisions_Index;  //pointer to the collisions array
     int* Filled;            //pointer to the filled array
     int* Collisions_Filled; //colliosn vs filled
-    string* hash_table;     //the string array that stores the hashs
+    int* hash_table;     //the int array that stores the index of the stored objects 
 
-    int hash_function(const char *key);
-    double table_load();
-    HashTable(int MAX_KEY_LENGTH, int HASH_TABLE_SIZE_M, int DOUBLE_HASHING);
+    int hash_function(const char *key);//takes a string as a key and hashes 
+    double table_load();    //returns load of table
+    HashTable(int MAX_KEY_LENGTH, int HASH_TABLE_SIZE_M, int DOUBLE_HASHING);//constructor
     ~HashTable();
 };

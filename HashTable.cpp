@@ -12,14 +12,14 @@ HashTable::HashTable(int MAX_KEY_LENGTH, int HASH_TABLE_SIZE_M, int DOUBLE_HASHI
     max_key_length = MAX_KEY_LENGTH;
     table_size = HASH_TABLE_SIZE_M;
     double_hashing = DOUBLE_HASHING;//set the hash type which will determine if the linear probing or double hashing is used
-    hash_table = new string[table_size];//allocate memory for hash table
+    hash_table = new Node[table_size];//allocate memory for hash table
     Collisions_Index = new int[table_size];
     Filled = new int[table_size];
     Collisions_Filled = new int[table_size];
     //empty table
     for (int i = 0; i < table_size; i++)
     {
-        hash_table[i] = '-';
+        hash_table[i].key = '-';
         Collisions_Index[i] = 0;
         Filled[i] = 0;
         Collisions_Index[i] = 0;
@@ -65,12 +65,12 @@ int HashTable::hash_function(const char *key)
     while (found == 0)
     {
         //check if index being checked is empty
-        if (hash_table[index][0] == '-')
+        if (hash_table[index].key[0] == '-')
         {
             found = 1;      //if the index being checked is empty set found flag to 1
             filled_cells++; //add one to the number of filled cells(this is the first time we've added this key)
         }
-        else if (strcasecmp(&hash_table[index][0], key) == 0)
+        else if (strcasecmp(&hash_table[index].key[0], key) == 0)
         {
             found = 2; //if the index being checked containts the key, set found flag to 1
             //we have found the key in the table, we dont need to add 1 to filled
@@ -107,7 +107,7 @@ int HashTable::hash_function(const char *key)
     //-if the table wasnt full(we found an available index) copy the key to the table-
     if (index != -1)
     {
-        strcpy(&hash_table[index][0], key);
+        strcpy(&hash_table[index].key[0], key);
         collisions += probes;
         Collisions_Index[index] = probes;
         Filled[index] = 1;
