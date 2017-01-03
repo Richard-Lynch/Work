@@ -10,10 +10,7 @@ class Row{
     public:
     string* col_list;
 
-    int hash_function(const char *key);
     int add(columns col_num, string value);
     Row();
-
-    HashTable(int MAX_KEY_LENGTH, int HASH_TABLE_SIZE_M, int DOUBLE_HASHING);
-    ~HashTable();
+    ~Row();
 };
