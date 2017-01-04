@@ -9,8 +9,10 @@ using namespace std;
 class Row{
     public:
     string* col_list;
+    int index;
 
-    int add(columns col_num, string value);
+    int add(int col_num, string value);
+    Row(int Index);
     Row();
     ~Row();
 };

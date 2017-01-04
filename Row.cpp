@@ -3,12 +3,10 @@
 #include <math.h>
 #include <iostream>
 #include <fstream>
-#include "Enum_Columns.cpp"
 #include "Row.hpp"
 using namespace std;
 
-int Row::add(columns col_num, string value);
-{
+int Row::add(int col_num, string value){
     if(col_list[col_num][0] != '-'){
         col_list[col_num] = value;
         return 1;
@@ -16,16 +14,28 @@ int Row::add(columns col_num, string value);
     else return 0;
 }
 
+Row::Row(int Index){
+    //allocate memory for hash table
+    col_list = new string[COLS_total];
+
+    //empty the table
+    for (int i = 0; i < COLS_total; i++){
+        col_list[i] = '-';
+    }
+    index = Index;
+    
+}
+
 Row::Row(){
     //allocate memory for hash table
     col_list = new string[COLS_total];
 
     //empty the table
-    for (int i = 0; i < table_size; i++){
-        hash_table[i] = '-';
-        }
+    for (int i = 0; i < COLS_total; i++){
+        col_list[i] = '-';
+    }
 }
 
 Row::~Row(){
-    delete[] col_list;
+    //delete[] col_list;
 }

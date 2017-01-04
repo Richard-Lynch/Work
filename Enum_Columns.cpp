@@ -1,6 +1,6 @@
 
 
-enum columns{
+enum Cols{
     //client detailed
     C_Customer_Name,
     C_Site_Name,
@@ -28,7 +28,7 @@ enum columns{
     C_5c,
     C_2c,
     C_1c,
-    C_Mixed Coin,
+    C_Mixed_Coin,
     C_BIC,
     C_IBAN,
     C_PAYDAY,
@@ -50,4 +50,4 @@ enum columns{
     
     //total
     COLS_total
-}
+};
