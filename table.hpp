@@ -14,8 +14,11 @@ class table{
     int index;
     fstream sCli, sDyn;
 
+    void test(int INDEX);
+
     int add(int INDEX);
     void print();
+    table(int test, string Dynamic, string Client);
     table(string Dynamic, string Client);
     ~table();
 };

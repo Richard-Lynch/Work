@@ -18,11 +18,12 @@ int num_cols;
 //     int index;
 // };
 int main(){
-    string DynamicFile = "Dyn1.csv";
-    string ClientFile = "Cli1.csv";
+    string DynamicFile = "Dyn2.csv";
+    string ClientFile = "Cli2.csv";
 
-    table Dix(DynamicFile, ClientFile);
-    Dix.print();
+    table Dix(1, DynamicFile, ClientFile);
+    //Dix.test(1);
+    //Dix.print();
 
 
 

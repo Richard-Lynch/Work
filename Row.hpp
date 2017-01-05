@@ -8,7 +8,7 @@ using namespace std;
 
 class Row{
     public:
-    string* col_list;
+    string col_list[COLS_total];
     int index;
 
     int add(int col_num, string value);
