@@ -15,14 +15,18 @@ class table{
     //int index;
     int cli_rows;
     int dyn_rows;
+    int max_rows;
     fstream sCli, sDyn;
 
     //void test(int INDEX);
-    void add_cli(int INDEX);
-    void add_dyn(int INDEX);
+    int add_cli(int INDEX);
+    int add_dyn(int INDEX);
 
-    int add(int INDEX);
-    void print();
+    int align();
+
+    void test_print();
+    void print(int cliCol, int dynCol);
+    void print(int* cols_to_print, int* from_file, int number_cols);
     table(int test, string Dynamic, string Client);
     //table(string Dynamic, string Client);
     ~table();

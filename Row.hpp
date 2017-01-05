@@ -13,6 +13,7 @@ class Row{
     int index;
     int max_size;
 
+    void swap(Row rhs);
     void fill();
     int add(string value);
     Row(int Index, int size);

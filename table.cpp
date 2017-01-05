@@ -4,10 +4,9 @@
 #include <iostream>
 #include <fstream>
 #include "table.hpp"
-// #include "Enum_Columns.cpp"
 using namespace std;
 
-void table::add_cli(int INDEX){
+int table::add_cli(int INDEX){
     //create temp vars
     string tempString;
     Row tempCliRow(INDEX, C_Cols_Total);
@@ -23,11 +22,12 @@ void table::add_cli(int INDEX){
 
     //get the row as a string
     getline(sCli, tempString, '\r');
-    if(INDEX >66){printf("String: %s",tempString.c_str());}
+    //if(INDEX >66){printf("String: %s",tempString.c_str());}
 
     //check if we're at the end of the report
-    if(tempString.substr(0, 12)=="End of Report"){
-        return;
+    if(tempString.substr(1, 13)=="End of Report"){
+        printf("Reached end of report\n");
+        return 0;
     }
 
     //parse the string
@@ -66,11 +66,12 @@ void table::add_cli(int INDEX){
     tempCliRow.fill();
 
     cli_row_list.push_back(tempCliRow);
+    return 1;
     //printf("Testing Client Row: %s\n\n",(cli_row_list[index]).col_list[8].c_str());
 }
 //-----------------------------------------------------------------
 
-void table::add_dyn(int INDEX){
+int table::add_dyn(int INDEX){
     //create temp vars
     string tempString;
     Row tempDynRow(INDEX, D_Cols_Total);
@@ -86,11 +87,12 @@ void table::add_dyn(int INDEX){
 
     //get the row as a string
     getline(sDyn, tempString, '\r');
-    if(INDEX >100){printf("String: %s",tempString.c_str());}
+    //if(INDEX >100){printf("String: %s",tempString.c_str());}
 
      //check if we're at the end of the report
     if(tempString.substr(1, 13)=="End of Report"){
-        return;
+        printf("Reached end of report\n");
+        return 0;
     }
 
     //parse the string
@@ -122,84 +124,96 @@ void table::add_dyn(int INDEX){
 
     tempDynRow.fill();
     dyn_row_list.push_back(tempDynRow);
+    return 1;
     //printf("Testing Dyn Row: %s\n\n",(dyn_row_list[index]).col_list[5].c_str());
 
 }
 //-----------------------------------------------------------------
 
-
-
-//-----------------------------------------------------------------
-
-
-int table::add(int INDEX)
-{return 0;}
-// int table::add(int INDEX)
-// {
-//     //add values from Client
-//     string tempString;
-//     Row tempRow(INDEX);
-//     int NewIt = 0;
-//     int OldIt = 0;
-//     //get the row as a string
-//     getline(sCli, tempString, '\r');
-//     //parse the string
-//     for(int i = 0; i<D_Client_Location; i++){
-//         while(  tempString[NewIt] != ',' &&
-//                 tempString[NewIt] != '\r' && 
-//                 tempString[NewIt] != '\n' && 
-//                 tempString[NewIt]  ){
-//                     NewIt++;
-//                 }
-//         //add the entry to the row
-//         string tempSub = tempString.substr(OldIt, NewIt-OldIt);
-//         tempRow.add(i, tempSub);
-//         OldIt = NewIt;
-//     }
-
-//     //Add details from Dynamic
-//     NewIt = 0;
-//     OldIt = 0;
-//     getline(sDyn, tempString, '\r');
-//     //parse the string
-//     for(int i = D_Client_Location; i<COLS_total; i++){
-//         while(  tempString[NewIt] != ',' &&
-//                 tempString[NewIt] != '\r' && 
-//                 tempString[NewIt] != '\n' && 
-//                 tempString[NewIt]  ){
-//                     NewIt++;
-//                 }
-//         //tempRow.col_list[i] = tempString.substr(OldIt, NewIt-OldIt);
-//         //add the entry to the row
-//         string tempSub = tempString.substr(OldIt, NewIt-OldIt);
-//         int test = tempRow.add(i, tempSub);
-            
-//         if(test == 1){
-//             printf("issue adding col %i of row %i \n", i, INDEX);
-//         }
-//         OldIt = NewIt;
-//     }
-
-//     //Add the Row to the Table
-//     row_list.push_back(tempRow);
-
-//     return 1;
-// }
-
-//-----------------------------------------------------------------
-
-
-void table::print(){
-    for(int i = 0; i<cli_rows; i++){
-        for(int j = 0; j<C_Cols_Total; j++){
-            printf("%s [] ", ((cli_row_list[i]).col_list[j]).c_str());
-        } 
+int table::align(){
+    int swapped = 0;
+    for(int i = 0; i < cli_rows; i++){
+        //check if the rows match
+        if( cli_row_list[i].col_list[C_ID_Processed].compare(dyn_row_list[i].col_list[D_Bag]) != 0||
+            cli_row_list[i].col_list[C_Total_Notes].compare(dyn_row_list[i].col_list[D_Euro_Notes_Total]) != 0||
+            cli_row_list[i].col_list[C_Total_Coins].compare(dyn_row_list[i].col_list[D_Euro_Coin_Total]) != 0||
+            cli_row_list[i].col_list[C_Total_Cash].compare(dyn_row_list[i].col_list[D_Cash_Total])!= 0    ){   
+                //if they dont
+                int j = i;
+                while ( j<dyn_rows-1 && ( 
+                        cli_row_list[i].col_list[C_ID_Processed].compare(dyn_row_list[j].col_list[D_Bag]) != 0||
+                        cli_row_list[i].col_list[C_Total_Notes].compare(dyn_row_list[j].col_list[D_Euro_Notes_Total]) != 0||
+                        cli_row_list[i].col_list[C_Total_Coins].compare(dyn_row_list[j].col_list[D_Euro_Coin_Total]) != 0||
+                        cli_row_list[i].col_list[C_Total_Cash].compare(dyn_row_list[j].col_list[D_Cash_Total])!= 0    )){
+                            //if(j < dyn_rows-1){
+                                j++;
+                            //}
+                            //else{
+                              //  printf("AHHHHHHHH\n");
+                               // break;
+                                //}
+                        }
+                if(j < dyn_rows-1){
+                    swapped = 1;
+                    dyn_row_list[i].swap(dyn_row_list[j]);
+                    dyn_row_list[i].index = i;
+                    printf("Swapped %i with %i\n", i, j);
+                }
+                else{
+                    printf("Couldnt Swap %i, reached end of dyn\n", i);
+                }
+            }
     }
-    for(int i = 0; i<dyn_rows; i++){
-        for(int j = 0; j<D_Cols_Total; j++){
-            printf("%s [] ", ((dyn_row_list[i]).col_list[j]).c_str());
-        }
+    if(swapped == 0){
+        printf("Nothing Swapped\n");
+    }
+    return swapped;
+}
+
+//-----------------------------------------------------------------
+
+void table::test_print(){
+    printf("Testing Rows: \n");
+    for(int i = 0; i<cli_row_list.size();i++){
+        printf("Testing Client Row %i: %s\n", i, (cli_row_list[i]).col_list[8].c_str());
+    }    
+    printf("\n");
+    for(int i = 0; i<dyn_row_list.size(); i++){
+        printf("Testing Dyn Row %i: %s\n", i, (dyn_row_list[i]).col_list[5].c_str());
     } 
+
+    printf("\n");
+}
+//-----------------------------------------------------------------
+
+void table::print(int cliCol, int dynCol){
+    printf("Printing Rows: \n");
+    printf("Index  Client               Dynamic \n");
+    for(int i = 0; i<cli_rows;i++){
+        printf("%i:     (%s)         (%s)\n", i+1, cli_row_list[i].col_list[cliCol].c_str(), dyn_row_list[i].col_list[dynCol].c_str());
+    }    
+    printf("\n");
+}
+//-----------------------------------------------------------------
+
+void table::print(int* cols_to_print, int* from_file, int number_cols){
+    printf("Printing Rows: \n");
+    string temp;
+    for(int i = 0; i<max_rows;i++){
+        printf("%i: ", i+1);
+        for(int j = 0; j<number_cols; j++){
+            if(from_file[j] == 0){
+                temp =  cli_row_list[i].col_list[cols_to_print[j]];
+            }else if(from_file[j] == 1){
+                temp = dyn_row_list[i].col_list[cols_to_print[j]];
+            }else{
+                printf("ERROR!!!\n");
+            }
+            printf("%s ", temp.c_str());
+        }
+        printf("\n");
+    }    
+    printf("Finished Printing Rows\n");
 }
 
 //-----------------------------------------------------------------
@@ -219,67 +233,39 @@ table::table(int T, string Dynamic, string Client){
         printf("Dynamic Transatic File did not open.\n");
         return;
     }
-
-    while(!sCli.eof()){
+    int end = 1;
+    while(!sCli.eof()&& end == 1 ){
         printf("adding client row %i\n",cli_rows);
-        add_cli(cli_rows);
-        cli_rows++;
+        end = add_cli(cli_rows);
+        cli_rows += end;
     }
 
-    while(!sDyn.eof()){
+    end = 1;
+    while(!sDyn.eof()&& end == 1){
         printf("adding dynamic row %i\n",dyn_rows);
-        add_dyn(dyn_rows);
-        dyn_rows++;
+        end = add_dyn(dyn_rows);
+        dyn_rows += end;
     }
 
-    printf("Testing Rows: \n");
-    for(int i = 0; i<cli_row_list.size();i++){
-        printf("Testing Client Row %i: %s\n", i, (cli_row_list[i]).col_list[8].c_str());
-    }    
-    printf("\n");
-    for(int i = 0; i<dyn_row_list.size(); i++){
-        printf("Testing Dyn Row %i: %s\n", i, (dyn_row_list[i]).col_list[5].c_str());
-    } 
-    printf("\n");
+    if(cli_rows < dyn_rows){
+        max_rows = cli_rows;
+    }else{
+        max_rows = dyn_rows;
+    }
+
+    print(C_ID_Processed, D_Bag);
+    align();
+    print(C_ID_Processed, D_Bag);
+    align();
+    print(C_ID_Processed, D_Bag);
+
+    int print_cols[] = {C_ID_Processed, C_Total_Cash, D_Bag, D_Cash_Total};
+    int cols_file[] = {0, 0, 1, 1};
+
+    print(print_cols, cols_file, 4);
+
 }
 //-----------------------------------------------------------------
-
-
-// table::table(string Dynamic, string Client){
-//     //index = 0;
-//     //open the file streams
-//     sCli.open(Client);
-//     sDyn.open(Dynamic);
-//     //check they opened correcly
-//     if(!sCli.is_open()){
-//         printf("Client Activity File did not open.\n");
-//         return;
-//     }
-//     if(!sDyn.is_open()){
-//         printf("Dynamic Transatic File did not open.\n");
-//         return;
-//     }
-//     //clear the useless content at the top of the file
-//     //(going to test input data first, will uncomment later - Richie)
-//     string temp;
-//     // for(int i = 0l i<1; i++){
-//     //     getline(sCli, temp '\r');
-//     // }
-//     // for(int i = 0; i<4; i++){
-//     //     getline(sDyn, temp '\r');
-//     // }
-
-//     temp = "";
-
-//     while(!sCli.eof() && !sDyn.eof()){
-//         printf("adding %i row\n",index);
-//         add(index);
-//         //test(index);
-//         index++;
-//     }
-// }
-//-----------------------------------------------------------------
-
 
 table::~table(){
     cli_row_list.clear();

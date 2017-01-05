@@ -183,3 +183,46 @@
     //return 1;
     //printf("Ending test.\n");
 }
+
+
+
+
+// table::table(string Dynamic, string Client){
+//     //index = 0;
+//     //open the file streams
+//     sCli.open(Client);
+//     sDyn.open(Dynamic);
+//     //check they opened correcly
+//     if(!sCli.is_open()){
+//         printf("Client Activity File did not open.\n");
+//         return;
+//     }
+//     if(!sDyn.is_open()){
+//         printf("Dynamic Transatic File did not open.\n");
+//         return;
+//     }
+//     //clear the useless content at the top of the file
+//     //(going to test input data first, will uncomment later - Richie)
+//     string temp;
+//     // for(int i = 0l i<1; i++){
+//     //     getline(sCli, temp '\r');
+//     // }
+//     // for(int i = 0; i<4; i++){
+//     //     getline(sDyn, temp '\r');
+//     // }
+
+//     temp = "";
+
+//     while(!sCli.eof() && !sDyn.eof()){
+//         printf("adding %i row\n",index);
+//         add(index);
+//         //test(index);
+//         index++;
+//     }
+// }
+//-----------------------------------------------------------------
+
+/*cli_row_list[i].col_list[7].compare(dyn_row_list[j].col_list[13]) != 0||*/
+                        cli_row_list[i].col_list[8].compare(dyn_row_list[j].col_list[10]) != 0||
+                        cli_row_list[i].col_list[9].compare(dyn_row_list[j].col_list[11]) != 0||
+                        cli_row_list[i].col_list[10].compare(dyn_row_list[j].col_list[12])!= 0))

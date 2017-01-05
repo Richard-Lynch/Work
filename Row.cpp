@@ -19,6 +19,22 @@ void Row::fill(){
     col_list.resize(max_size, "-");
 }
 
+void Row::swap(Row rhs){
+    Row temp;
+    temp.col_list = col_list;
+    temp.index = index;
+    temp.max_size = max_size;
+
+    col_list = rhs.col_list;
+    index = rhs.index;
+    max_size = rhs.max_size;
+
+    rhs.col_list = temp.col_list;
+    rhs.index = temp.index;
+    rhs.max_size = temp.max_size;
+
+}
+
 Row::Row(int Index, int size){
     //empty the table
     // for (int i = 0; i < COLS_total; i++){
