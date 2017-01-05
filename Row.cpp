@@ -6,30 +6,35 @@
 #include "Row.hpp"
 using namespace std;
 
-int Row::add(int col_num, string value){
-    if(col_list[col_num][0] == '-'){
-        col_list[col_num] = value;
+int Row::add(string value){
+    if(col_list.size() < max_size){
+        col_list.push_back(value);
         return 1;
     }
-    else return 0;
+    else
+    printf("DAZ TOO BIG\n"); return 0;
 }
 
-Row::Row(int Index){
+void Row::fill(){
+    col_list.resize(max_size, "-");
+}
+
+Row::Row(int Index, int size){
     //empty the table
-    for (int i = 0; i < COLS_total; i++){
-        col_list[i] = '-';
-    }
+    // for (int i = 0; i < COLS_total; i++){
+    //     col_list[i] = '-';
+    // }
+    max_size = size;
     index = Index;
     
 }
 
 Row::Row(){
     //empty the table
-    for (int i = 0; i < COLS_total; i++){
-        col_list[i] = '-';
-    }
+    col_list.resize(100, "-");
 }
 
 Row::~Row(){
+    col_list.clear();
     //delete[] col_list;
 }

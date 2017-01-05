@@ -44,3 +44,142 @@
     string D_Bag
     string D_Difference
     string D_Comments
+
+
+    void test(int INDEX){
+    //printf("Starting test.\n");
+    string tempString;
+    Row tempCliRow(INDEX, C_Cols_Total);
+    int NewIt;
+    if(INDEX > 0){
+        NewIt = 1;
+    }else{
+        NewIt = 0;
+    }
+    int OldIt = NewIt;
+    //get the row as a string
+    getline(sCli, tempString, '\r');
+    if(tempString.substr(0, 12)=="End of Report"){
+        return;
+    }
+
+    //printf("Long Client string: %s\n", tempString.c_str());
+
+    //parse the string
+    for(int i = 0; i<C_Cols_Total; i++){
+        while(  tempString[NewIt] != ',' &&
+                tempString[NewIt] != '\r' && 
+                //tempString[NewIt] != '\n' && 
+                tempString[NewIt]   ){
+            if(NewIt > strlen(tempString.c_str())){
+                break;
+            }
+            if(tempString[NewIt] == '"'){
+                NewIt++;
+                while(  tempString[NewIt] != '"'&&
+                        tempString[NewIt] ){
+                    NewIt++;
+                }
+                NewIt++;
+            }
+            else{
+                NewIt++;
+            }
+        }
+        if(NewIt > strlen(tempString.c_str())){
+                break;
+        }
+        //add the entry to the row
+        string tempSub = tempString.substr(OldIt, NewIt-OldIt);
+        //remove endline
+        // if(i == D_Client_Location-1){
+        //     NewIt--;
+        // }
+
+        //printf("Adding Sub string: %s\n", tempSub.c_str());
+        tempCliRow.add(tempSub);
+        NewIt++;
+        OldIt = NewIt;
+    }
+
+    tempCliRow.fill();
+
+    cli_row_list.push_back(tempCliRow);
+    //printf("Testing Client Row: %s\n\n",(cli_row_list[index]).col_list[8].c_str());
+
+    // printf("Printing Cols Client from Row.\n");
+    // for(int i = 0; i<D_Client_Location; i++){
+    //     printf("Col %i: %s\n", i, tempRow.col_list[i].c_str());
+    // }
+    // printf("Finished Printing Cols from Row.\n");
+
+    //------------------------------------
+
+    Row tempDynRow(INDEX, D_Cols_Total);
+
+    if(INDEX > 0){
+        NewIt = 1;
+    }else{
+        NewIt = 0;
+    }
+    OldIt = NewIt;
+    //get the row as a string
+    getline(sDyn, tempString, '\r');
+
+    //printf("Long Dynamic string: %s\n", tempString.c_str());
+
+    //parse the string
+    for(int i = 0; i<D_Cols_Total; i++){
+        while(  tempString[NewIt] != ',' &&
+                tempString[NewIt] != '\r' && 
+                //tempString[NewIt] != '\n' && 
+                tempString[NewIt]  ){
+            if(tempString[NewIt] == '"'){
+                NewIt++;
+                while(tempString[NewIt] != '"'){
+                    NewIt++;
+                }
+                NewIt++;
+            }
+            else{
+                NewIt++;
+            }
+        }
+        //add the entry to the row
+        string tempSub = tempString.substr(OldIt, NewIt-OldIt);
+        //remove endline
+        // if(i == COLS_total-1){
+        //     NewIt--;
+        // }
+        printf("Adding Sub string %i: %s\n", i, tempSub.c_str());
+        tempDynRow.add(tempSub);
+        //printf("Testing Sub string %i: %s\n", i, tempDynRow.col_list[i].c_str());
+        
+        NewIt++;
+        OldIt = NewIt;
+    }
+
+    // printf("Printing Dynamic Cols from Row.\n");
+    // for(int i = D_Client_Location; i<COLS_total; i++){
+    //     printf("Col %i: %s\n", i, tempRow.col_list[i].c_str());
+    // }
+    // printf("Finished Printing Cols from Row.\n");
+
+    // printf("Printing ALL Cols from Row %i.\n", INDEX);
+    // for(int i = 0; i<COLS_total; i++){
+    //     printf("Col %i: %s\n", i, tempRow.col_list[i].c_str());
+    // }
+
+    //printf("Finished Printing Cols from Row %i.\n", INDEX);
+
+     //printf("Adding Row to Table.\n");
+    //Add the Row to the Table
+    tempDynRow.fill();
+    dyn_row_list.push_back(tempDynRow);
+    printf("Testing Dyn Row: %s\n\n",(dyn_row_list[index]).col_list[5].c_str());
+    //printf("Finished Adding Row.\n");
+
+
+    //return 1;
+    //printf("Ending test.\n");
+}

@@ -1,6 +1,24 @@
+enum DynCols{
+//dynamic trans
+    D_Client_Location,
+    D_Site_No,
+    D_Deposit_Date,
+    D_Ref_Num_PIS,
+    D_STC,
+    D_Cheques,
+    D_GBP,
+    D_Euro_Notes_Total,
+    D_Euro_Coin_Total,
+    D_Cash_Total,
+    D_Bag,
+    D_Difference,
+    D_Comments,
 
+    //total
+    D_Cols_Total
+};
 
-enum Cols{
+enum CliCols{
     //client detailed
     C_Customer_Name,
     C_Site_Name,
@@ -32,22 +50,7 @@ enum Cols{
     C_BIC,
     C_IBAN,
     C_PAYDAY,
-
-//dynamic trans
-    D_Client_Location,
-    D_Site_No,
-    D_Deposit_Date,
-    D_Ref_Num_PIS,
-    D_STC,
-    D_Cheques,
-    D_GBP,
-    D_Euro_Notes_Total,
-    D_Euro_Coin_Total,
-    D_Cash_Total,
-    D_Bag,
-    D_Difference,
-    D_Comments,
     
     //total
-    COLS_total
+    C_Cols_Total
 };

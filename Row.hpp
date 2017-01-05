@@ -3,16 +3,19 @@
 #include <math.h>
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include "Enum_Columns.cpp"
 using namespace std;
 
 class Row{
     public:
-    string col_list[COLS_total];
+    vector <string> col_list;
     int index;
+    int max_size;
 
-    int add(int col_num, string value);
-    Row(int Index);
+    void fill();
+    int add(string value);
+    Row(int Index, int size);
     Row();
     ~Row();
 };
