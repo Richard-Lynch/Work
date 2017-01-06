@@ -217,6 +217,27 @@ void table::print(int* cols_to_print, int* from_file, int number_cols){
 }
 
 //-----------------------------------------------------------------
+// void table::output(int* cols_to_print, int* from_file, int number_cols){
+//     printf("Printing Rows: \n");
+//     string temp;
+//     for(int i = 0; i<max_rows;i++){
+//         printf("%i: ", i+1);
+//         for(int j = 0; j<number_cols; j++){
+//             if(from_file[j] == 0){
+//                 temp =  cli_row_list[i].col_list[cols_to_print[j]];
+//             }else if(from_file[j] == 1){
+//                 temp = dyn_row_list[i].col_list[cols_to_print[j]];
+//             }else{
+//                 printf("ERROR!!!\n");
+//             }
+//             printf("%s ", temp.c_str());
+//         }
+//         printf("\n");
+//     }    
+//     printf("Finished Printing Rows\n");
+// }
+
+//-----------------------------------------------------------------
 
 table::table(int T, string Dynamic, string Client){
     cli_rows = dyn_rows = 0;
@@ -259,10 +280,11 @@ table::table(int T, string Dynamic, string Client){
     align();
     print(C_ID_Processed, D_Bag);
 
-    int print_cols[] = {C_ID_Processed, C_Total_Cash, D_Bag, D_Cash_Total};
-    int cols_file[] = {0, 0, 1, 1};
+    int print_cols[] = {C_Customer_Code, D_Site_No, D_Client_Location, D_Deposit_Date, D_Ref_Num_PIS,D_STC, D_Euro_Notes_Total, D_Euro_Coin_Total, D_Cash_Total,D_Difference,D_GBP,D_Cols_Total,
+    C_200, C_100, C_50, C_20, C_10, C_5, C_2, C_1, C_50c, C_20c, C_10c, C_5c, C_2c, C_1c};
+    int cols_file[] = {0, 1, 1, 1, 1,1, 1, 1, 1, 1,1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-    print(print_cols, cols_file, 4);
+    print(print_cols, cols_file, 26);
 
 }
 //-----------------------------------------------------------------

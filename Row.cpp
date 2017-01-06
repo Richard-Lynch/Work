@@ -16,7 +16,7 @@ int Row::add(string value){
 }
 
 void Row::fill(){
-    col_list.resize(max_size, "-");
+    col_list.resize(max_size+1, "0");
 }
 
 void Row::swap(Row rhs){
