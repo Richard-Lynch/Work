@@ -172,6 +172,31 @@ int table::align(){
 
 //-----------------------------------------------------------------
 
+int table::combine(){
+    int combined = 0;
+    
+    Row temp;
+
+    for(int i = 0; i<max_rows; i++){
+        temp = cli_row_list[i];
+        temp.append(dyn_row_list[i]);
+        string shortB = temp.col_list[cD_Bag];
+
+        std::string str3 = str.substr (pos); 
+
+        temp.col_list[cShort_bag_number] = shortB;
+        temp.add("0");
+        combined_row_list.push_back(temp);
+    }
+
+    combined = 1;
+
+    return combined;
+}
+
+
+//-----------------------------------------------------------------
+
 void table::test_print(){
     printf("Testing Rows: \n");
     for(int i = 0; i<cli_row_list.size();i++){
@@ -217,6 +242,44 @@ void table::print(int* cols_to_print, int* from_file, int number_cols){
 }
 
 //-----------------------------------------------------------------
+
+void table::print_combined_row(int cols_to_print[], int number_cols){
+    printf("Printing combined Rows: \n");
+    string temp;
+    for(int i = 0; i<max_rows; i++){
+        printf("%i: ", i+1);
+        for(int j = 0; j<number_cols; j++){
+            temp =  combined_row_list[i].col_list[cols_to_print[j]];
+            printf("%s ", temp.c_str());
+        }
+        printf("\n");
+    }    
+    printf("Finished Printing combined Rows\n");
+}
+
+//-----------------------------------------------------------------
+
+void table::output(int cols_to_print[], int number_cols){
+    
+    FILE* out;
+    out = fopen("OUTPUT.csv", "w");
+
+
+    //printf("Printing combined Rows: \n");
+    string temp;
+    for(int i = 0; i<max_rows; i++){
+       // printf("%i: ", i+1);
+        for(int j = 0; j<number_cols; j++){
+            temp =  combined_row_list[i].col_list[cols_to_print[j]];
+            fprintf(out, "%s,", temp.c_str());
+        }
+        fprintf(out, "\n");
+    }    
+    fprintf(out, "Finished Printing combined Rows\n");
+}
+
+//-----------------------------------------------------------------
+
 // void table::output(int* cols_to_print, int* from_file, int number_cols){
 //     printf("Printing Rows: \n");
 //     string temp;
@@ -285,6 +348,15 @@ table::table(int T, string Dynamic, string Client){
     int cols_file[] = {0, 1, 1, 1, 1,1, 1, 1, 1, 1,1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     print(print_cols, cols_file, 26);
+
+    combine();
+    int c_print_cols[] = {cC_Customer_Code, cD_Site_No, cD_Client_Location, cD_Deposit_Date, cD_Ref_Num_PIS, cD_STC, cD_Euro_Notes_Total, cD_Euro_Coin_Total, cD_Cash_Total,cD_Difference,cD_GBP,c_Cols_Total,
+    cC_200, cC_100, cC_50, cC_20, cC_10, cC_5, cC_2, cC_1, cC_50c, cC_20c, cC_10c, cC_5c, cC_2c, cC_1c};
+    print_combined_row(c_print_cols, 26);
+
+    printf("Outputting to file\n");
+    output(c_print_cols, 26);
+    printf("Finished Outputting to file\n");
 
 }
 //-----------------------------------------------------------------

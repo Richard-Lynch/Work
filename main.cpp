@@ -22,6 +22,7 @@ int main(){
     string ClientFile = "Cli3.csv";
 
     table Dix(1, DynamicFile, ClientFile);
+
     //Dix.test(1);
     //Dix.print();
 

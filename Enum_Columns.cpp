@@ -57,3 +57,59 @@ enum CliCols{
     //total
     C_Cols_Total
 };
+
+enum ComCols{
+    //client detailed
+    cC_Customer_Name,
+    cC_Site_Name,
+    cC_Customer_Code,
+    cC_Date,
+    cC_Transaction_type,
+    cC_Process_type,
+    cC_Quantity,
+    cC_ID_Processed,
+    cC_Total_Notes,
+    cC_Total_Coins,
+    cC_Total_Cash,
+    cC_500,
+    cC_200,
+    cC_100,
+    cC_50,
+    cC_20,
+    cC_10,
+    cC_5,
+    cC_2,
+    cC_1,
+    cC_50c,
+    cC_20c,
+    cC_10c,
+    cC_5c,
+    cC_2c,
+    cC_1c,
+    cC_Mixed_Coin,
+    cC_BIC,
+    cC_IBAN,
+    cC_PAYDAY,
+    
+    //dynamic trans
+    cD_Client_Location,
+    cD_Site_No,
+    cD_Deposit_Date,
+    cD_Emtpty1,
+    cD_Ref_Num_PIS,
+    cD_STC,
+    cD_Location_Total,
+    cD_Cheques,
+    cD_GBP,
+    cD_Empty2,
+    cD_Euro_Notes_Total,
+    cD_Euro_Coin_Total,
+    cD_Cash_Total,
+    cD_Bag,
+    cD_Difference,
+    cD_Comments,
+    cShort_bag_number,
+
+    //total
+    c_Cols_Total
+};

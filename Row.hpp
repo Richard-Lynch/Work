@@ -13,9 +13,12 @@ class Row{
     int index;
     int max_size;
 
+    void append(Row rhs);
     void swap(Row rhs);
     void fill();
     int add(string value);
+    void operator=(Row rhs);
+    void short_bag();
     Row(int Index, int size);
     Row();
     ~Row();

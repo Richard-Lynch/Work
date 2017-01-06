@@ -19,6 +19,12 @@ void Row::fill(){
     col_list.resize(max_size+1, "0");
 }
 
+void Row::append(Row rhs){
+    col_list.reserve( col_list.size() + rhs.col_list.size() ); // preallocate memory
+    col_list.insert( col_list.end()-1, rhs.col_list.begin(), rhs.col_list.end() );
+    max_size  += rhs.max_size+1;
+}
+
 void Row::swap(Row rhs){
     Row temp;
     temp.col_list = col_list;
@@ -32,7 +38,12 @@ void Row::swap(Row rhs){
     rhs.col_list = temp.col_list;
     rhs.index = temp.index;
     rhs.max_size = temp.max_size;
+}
 
+void Row::operator=(Row rhs){
+    col_list = rhs.col_list;
+    index = rhs.index;
+    max_size = rhs.max_size;
 }
 
 Row::Row(int Index, int size){
