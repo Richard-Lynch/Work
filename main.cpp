@@ -18,8 +18,8 @@ int num_cols;
 //     int index;
 // };
 int main(){
-    string DynamicFile = "Dyn3.csv";
-    string ClientFile = "Cli3.csv";
+    string DynamicFile = "D_FINAL.csv";
+    string ClientFile = "C_FINAL.csv";
 
     table Dix(1, DynamicFile, ClientFile);
 

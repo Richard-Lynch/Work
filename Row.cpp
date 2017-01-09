@@ -9,14 +9,42 @@ using namespace std;
 int Row::add(string value){
     if(col_list.size() < max_size){
         col_list.push_back(value);
+        printf("added.\n");
         return 1;
     }
     else
-    printf("DAZ TOO BIG\n"); return 0;
+    printf("failed.\n"); return 0;
+}
+
+void Row::short_bag(){
+    string temp = col_list[cD_Bag];
+    if(strlen(temp.c_str())>4){
+        string temp2 = temp.substr(7, 6);
+        temp2.insert(4, "-");
+
+        col_list[cShort_bag_number] = temp2;
+        max_size++;
+    }
+    
+    fill();
 }
 
 void Row::fill(){
     col_list.resize(max_size+1, "0");
+}
+
+void Row::empty(){
+    for(int i = 0; i < max_size; i++){
+        col_list[i] = "";
+    }
+}
+
+void Row::filter(int pass[]){
+    for(int i = 0; i < max_size; i++){
+        if(i != pass[i]){
+            col_list[i] = "";
+        }
+    }
 }
 
 void Row::append(Row rhs){
@@ -58,7 +86,7 @@ Row::Row(int Index, int size){
 
 Row::Row(){
     //empty the table
-    col_list.resize(100, "-");
+    col_list.push_back("-");
 }
 
 Row::~Row(){
