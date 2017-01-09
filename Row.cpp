@@ -9,7 +9,7 @@ using namespace std;
 int Row::add(string value){
     if(col_list.size() < max_size){
         col_list.push_back(value);
-        printf("added.\n");
+        //printf("added.\n");
         return 1;
     }
     else
@@ -53,19 +53,30 @@ void Row::append(Row rhs){
     max_size  += rhs.max_size+1;
 }
 
-void Row::swap(Row rhs){
-    Row temp;
-    temp.col_list = col_list;
-    temp.index = index;
-    temp.max_size = max_size;
+void Row::row_swap(Row rhs){
+    Row temp_Row(1,1);
+    temp_Row  = rhs;
 
-    col_list = rhs.col_list;
-    index = rhs.index;
-    max_size = rhs.max_size;
+    rhs.col_list = col_list;
+    rhs.index = index;
+    rhs.max_size = max_size;
 
-    rhs.col_list = temp.col_list;
-    rhs.index = temp.index;
-    rhs.max_size = temp.max_size;
+    *this = temp_Row;
+    
+    // printf("Making temp this\n");
+    // temp_Row.col_list = this->col_list;
+    // temp_Row.index = this->index;
+    // temp_Row.max_size = this->max_size;
+
+    // printf("Making this rhs\n");
+    // col_list = rhs.col_list;
+    // index = rhs.index;
+    // max_size = rhs.max_size;
+
+    // printf("Making rhs temp\n");
+    // rhs.col_list = temp_Row.col_list;
+    // rhs.index = temp_Row.index;
+    // rhs.max_size = temp_Row.max_size;
 }
 
 void Row::operator=(Row rhs){
@@ -75,10 +86,7 @@ void Row::operator=(Row rhs){
 }
 
 Row::Row(int Index, int size){
-    //empty the table
-    // for (int i = 0; i < COLS_total; i++){
-    //     col_list[i] = '-';
-    // }
+    printf("ROW CREATED\n");
     max_size = size;
     index = Index;
     

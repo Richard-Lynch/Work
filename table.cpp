@@ -139,12 +139,12 @@ int table::align(){
         //check if the rows match
         if( cli_row_list[i].col_list[C_ID_Processed].compare(dyn_row_list[i].col_list[D_Bag]) != 0){   
                 //if they dont
-                int j = i;
-                int loops = -1;
+                int j = 0;
+                int loops = 0;
                 bool tLoops = false;
                 bool tRows = false;
                 while (  !tLoops && !tRows){
-                    printf("Comparing %i(%s) and %i(%s), %i loops\n", i, cli_row_list[i].col_list[C_ID_Processed].c_str(),j,dyn_row_list[j].col_list[D_Bag].c_str(), loops);
+                    printf("Comparing %i(%s) and %i(%s), %i loops\n", i+1, cli_row_list[i].col_list[C_ID_Processed].c_str(),j+1,dyn_row_list[j].col_list[D_Bag].c_str(), loops);
                     if(j<dyn_rows-1){
                         j++;
                     }
@@ -153,6 +153,7 @@ int table::align(){
                     }
 
                     loops++;
+
                     if(!(loops<dyn_rows)){
                         tLoops = true;
                     }
@@ -162,9 +163,9 @@ int table::align(){
                         } 
                      }
                 }
-                if(loops < dyn_rows-1){
+                if(loops < dyn_rows){
                     swapped = 1;
-                    dyn_row_list[i].swap(dyn_row_list[j]);
+                    (dyn_row_list[i]).row_swap(dyn_row_list[j]);
                     printf("Swapped %i with %i\n", i+1, j+1);
                 }
                 else{

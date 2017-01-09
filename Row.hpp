@@ -14,7 +14,7 @@ class Row{
     int max_size;
 
     void append(Row rhs);
-    void swap(Row rhs);
+    void row_swap(Row rhs);
     void fill();
     void empty();
     void filter(int pass[]);
