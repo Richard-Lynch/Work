@@ -55,31 +55,24 @@ void Row::append(Row rhs){
 
 void Row::row_swap(Row* rhs){
     Row temp_Row(1,1);
-    // temp_Row  = rhs;
 
-    // rhs.col_list = col_list;
-    // rhs.index = index;
-    // rhs.max_size = max_size;
-
-    // *this = temp_Row;
-    
-    printf("Making temp = this\n");
+    //printf("Making temp = this\n");
     temp_Row.col_list = this->col_list;
     temp_Row.index = this->index;
     temp_Row.max_size = this->max_size;
-    printf("temp: (%s), this: (%s)\n", temp_Row.col_list[D_Bag].c_str(), col_list[D_Bag].c_str());
+    //printf("temp: (%s), this: (%s)\n", temp_Row.col_list[D_Bag].c_str(), col_list[D_Bag].c_str());
 
-    printf("Making this = rhs\n");
+    //printf("Making this = rhs\n");
     col_list = rhs->col_list;
     index = rhs->index;
     max_size = rhs->max_size;
-    printf("this: (%s), rhs: (%s)\n", col_list[D_Bag].c_str(), rhs->col_list[D_Bag].c_str());
+    //printf("this: (%s), rhs: (%s)\n", col_list[D_Bag].c_str(), rhs->col_list[D_Bag].c_str());
 
-    printf("Making rhs = temp\n");
+    //printf("Making rhs = temp\n");
     rhs->col_list = temp_Row.col_list;
     rhs->index = temp_Row.index;
     rhs->max_size = temp_Row.max_size;
-    printf("rhs: (%s), temp: (%s)\n", rhs->col_list[D_Bag].c_str(), temp_Row.col_list[D_Bag].c_str());
+    //printf("rhs: (%s), temp: (%s)\n", rhs->col_list[D_Bag].c_str(), temp_Row.col_list[D_Bag].c_str());
 }
 
 void Row::operator=(Row rhs){
@@ -89,7 +82,7 @@ void Row::operator=(Row rhs){
 }
 
 Row::Row(int Index, int size){
-    printf("ROW CREATED\n");
+    //printf("ROW CREATED\n");
     max_size = size;
     index = Index;
     

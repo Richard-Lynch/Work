@@ -91,7 +91,7 @@ int table::add_dyn(int INDEX){
 
      //check if we're at the end of the report
     if(tempString.substr(1, 13)=="End of Report"){
-        printf("failed.\n");
+        //printf("failed.\n");
         printf("Reached end of report\n");
         return 0;
     }
@@ -144,7 +144,7 @@ int table::align(){
                 bool tLoops = false;
                 bool tRows = false;
                 while (  !tLoops && !tRows){
-                    printf("Comparing %i(%s) and %i(%s), %i loops\n", i+1, cli_row_list[i].col_list[C_ID_Processed].c_str(),j+1,dyn_row_list[j].col_list[D_Bag].c_str(), loops);
+                    //printf("Comparing %i(%s) and %i(%s), %i loops\n", i+1, cli_row_list[i].col_list[C_ID_Processed].c_str(),j+1,dyn_row_list[j].col_list[D_Bag].c_str(), loops);
                     if(j<dyn_rows-1){
                         j++;
                     }
@@ -366,7 +366,12 @@ void table::output(int cols_to_print[], int number_cols, string file, int t, int
             
         for(int j = 0; j<number_cols; j++){
             temp =  combined_row_list[i].col_list[cols_to_print[j]];
-            fprintf(out, "%s,", temp.c_str());
+            if(cols_to_print[j] == cD_Bag){
+                fprintf(out, "\"%s\",", temp.c_str());
+            }else{
+                fprintf(out, "%s,", temp.c_str());
+            }
+            
         }
         fprintf(out, "\n");
     }    

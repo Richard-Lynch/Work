@@ -23,6 +23,30 @@ enum DynCols{
     D_Cols_Total
 };
 
+//pennies
+// enum penneyesDynCols{
+// //dynamic trans
+//     D_Client_Location,
+//     D_Site_No,
+//     D_Deposit_Date,
+//     D_Emtpty1,
+//     D_Ref_Num_PIS,
+//     D_STC,
+//     D_Location_Total,
+//     D_Cheques,
+//     D_GBP,
+//     D_Empty2,
+//     D_Euro_Notes_Total,
+//     D_Euro_Coin_Total,
+//     D_Cash_Total,
+//     D_Bag,
+//     D_Difference,
+//     D_Comments,
+
+//     //total
+//     D_Cols_Total
+// };
+
 enum CliCols{
     //client detailed
     C_Customer_Name,
