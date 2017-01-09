@@ -180,72 +180,6 @@ int table::align(){
 }
 
 //-----------------------------------------------------------------
-// int table::align2(){
-//     int swapped = 0;
-//     int doubled = 0;
-//     for(int i = 0; i < cli_rows; i++){
-//         //check if the rows match
-//         if( cli_row_list[i].col_list[C_ID_Processed].compare(dyn_row_list[i].col_list[D_Bag]) != 0){
-//             int j = i;
-//             while ( j<dyn_rows-1 && ( cli_row_list[i].col_list[C_ID_Processed].compare(dyn_row_list[j].col_list[D_Bag]) != 0){
-//                 j++;
-//             }
-//             if(j < dyn_rows-1){
-                    
-//                     if(cli_row_list[i].col_list[C_Total_Cash].compare(dyn_row_list[j].col_list[D_Cash_Total])== 0){
-//                         swapped = 1;
-//                         dyn_row_list[i].swap(dyn_row_list[j]);
-//                         dyn_row_list[i].index = i;
-//                         printf("Swapped %i with %i\n", i, j);
-//                     }
-//                     else{
-//                         Row tempRow = cli_row_list[i];
-//                         cli_row_list.insert(cli_row_list.begin() + i,tempRow)
-//                         cli_row_list[i+1].col_list[]
-//                     }
-                    
-//                 }
-//                 else{
-//                     printf("Couldnt Swap %i, reached end of dyn\n", i);
-//                 }
-
-//         }
-
-
-//         if( cli_row_list[i].col_list[C_ID_Processed].compare(dyn_row_list[i].col_list[D_Bag]) != 0){   
-//                 //if they dont
-//                 int j = i;
-//                 while ( j<dyn_rows-1 && ( 
-//                         cli_row_list[i].col_list[C_ID_Processed].compare(dyn_row_list[j].col_list[D_Bag]) != 0||
-//                         cli_row_list[i].col_list[C_Total_Notes].compare(dyn_row_list[j].col_list[D_Euro_Notes_Total]) != 0||
-//                         cli_row_list[i].col_list[C_Total_Coins].compare(dyn_row_list[j].col_list[D_Euro_Coin_Total]) != 0||
-//                         cli_row_list[i].col_list[C_Total_Cash].compare(dyn_row_list[j].col_list[D_Cash_Total])!= 0    )){
-//                             //if(j < dyn_rows-1){
-//                                 j++;
-//                             //}
-//                             //else{
-//                               //  printf("AHHHHHHHH\n");
-//                                // break;
-//                                 //}
-//                         }
-//                 if(j < dyn_rows-1){
-//                     swapped = 1;
-//                     dyn_row_list[i].swap(dyn_row_list[j]);
-//                     dyn_row_list[i].index = i;
-//                     printf("Swapped %i with %i\n", i, j);
-//                 }
-//                 else{
-//                     printf("Couldnt Swap %i, reached end of dyn\n", i);
-//                 }
-//             }
-//     }
-//     if(swapped == 0){
-//         printf("Nothing Swapped\n");
-//     }
-//     return swapped;
-// }
-
-//-----------------------------------------------------------------
 
 int table::combine(){
     int combined = 0;
@@ -342,7 +276,7 @@ void table::output(int cols_to_print[], int number_cols, string file, int t, int
     total.empty();
     for(int i = 0; i<max_rows; i++){
         
-        // totals
+        // TOTALS
         // if( i<0 && t<0){
         //     if( combined_row_list[i].col_list[cD_Client_Location] != combined_row_list[i-1].col_list[cD_Client_Location]){
         //         total.col_list[cols_to_print[0]] = "Total";
