@@ -165,7 +165,7 @@ int table::align(){
                 }
                 if(loops < dyn_rows){
                     swapped = 1;
-                    (dyn_row_list[i]).row_swap(dyn_row_list[j]);
+                    (dyn_row_list[i]).row_swap(&dyn_row_list[j]);
                     printf("Swapped %i with %i\n", i+1, j+1);
                 }
                 else{
