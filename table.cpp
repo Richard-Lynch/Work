@@ -157,7 +157,9 @@ int table::align(){
                     if(!(loops<dyn_rows)){
                         tLoops = true;
                     }
-                    if(cli_row_list[i].col_list[C_ID_Processed].compare(dyn_row_list[j].col_list[D_Bag]) == 0){
+                    //if(cli_row_list[i].col_list[C_ID_Processed].compare(dyn_row_list[j].col_list[D_Bag]) == 0){
+                    if( cli_row_list[i].col_list[C_ID_Processed].compare(dyn_row_list[j].col_list[D_Bag]) == 0 &&
+                        cli_row_list[i].col_list[C_Total_Cash].compare(dyn_row_list[j].col_list[D_Cash_Total]) == 0){
                         if(i != j){
                             tRows = true;
                         } 
@@ -210,7 +212,6 @@ void table::test_print(){
     for(int i = 0; i<dyn_row_list.size(); i++){
         printf("Testing Dyn Row %i: %s\n", i, (dyn_row_list[i]).col_list[5].c_str());
     } 
-
     printf("\n");
 }
 //-----------------------------------------------------------------
@@ -268,8 +269,8 @@ void table::output(int cols_to_print[], int number_cols, string file, int t, int
     FILE* out;
     out = fopen(file.c_str(), "w");
     //headings
-    //fprintf(out, "Store,CC Code,Dixons Carphone,Collection Date,Slip No,S.T.C.,Euro Notes,Euro Coins,Sub Total,Actual,Difference,STERLING,Internal Bag No,External Bag No,200,100,50,20,10,5\r\n");
-    fprintf(out, "Transaction Type,ISA,Primark Location,Location Name,Collection Date,Processing Date,Bag Number,Primark Ref.,Credit Amount,Discrepancy Amount,Discrepancy Reason\r\n");
+    fprintf(out, "Store,CC Code,Dixons Carphone,Collection Date,Slip No,S.T.C.,Euro Notes,Euro Coins,Sub Total,Actual,Difference,STERLING,Internal Bag No,External Bag No,200,100,50,20,10,5\r\n");
+    //fprintf(out, "Transaction Type,ISA,Primark Location,Location Name,Collection Date,Processing Date,Bag Number,Primark Ref.,Credit Amount,Discrepancy Amount,Discrepancy Reason\r\n");
     string temp;
     Row total;
     total = combined_row_list[0];
@@ -422,9 +423,9 @@ table::table(int T, string Dynamic, string Client){
     align();
     print(C_ID_Processed, D_Bag);
 
-    //output_dixons();
+    output_dixons();
 
-    output_pen();
+    //output_pen();
 
 }
 //-----------------------------------------------------------------
