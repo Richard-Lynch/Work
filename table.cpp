@@ -78,6 +78,7 @@ int table::add_dyn(int INDEX){
 
     //set the starting values for the string iterator
     int NewIt;
+    //NewIt = 0;
     if(INDEX > 0){
         NewIt = 1;
     }else{
@@ -85,9 +86,13 @@ int table::add_dyn(int INDEX){
     }
     int OldIt = NewIt;
 
-    //get the row as a string
+    //WORKING get the row as a string
     getline(sDyn, tempString, '\r');
     //if(INDEX >100){printf("String: %s",tempString.c_str());}
+
+    //TEST
+        //getline(sDyn, tempString, '\n'); //get a copy of the line(row)
+        //tempString = tempString.substr(NewIt);//remove the return carrage
 
      //check if we're at the end of the report
     if(tempString.substr(1, 13)=="End of Report"){
@@ -113,12 +118,15 @@ int table::add_dyn(int INDEX){
                 NewIt++;
             }
         }
-        //add the entry to the row
-        string tempSub = tempString.substr(OldIt, NewIt-OldIt);
-        //printf("Adding Sub string %i: %s\n", i, tempSub.c_str());
-        tempDynRow.add(tempSub);
-        
-        //printf("Testing Sub string %i: %s\n", i, tempDynRow.col_list[i].c_str());
+
+        //if(NewIt != OldIt){
+            //add the entry to the row
+            string tempSub = tempString.substr(OldIt, NewIt-OldIt);
+            //printf("Adding Sub string %i: %s\n", i, tempSub.c_str());
+            tempDynRow.add(tempSub);
+            //printf("Testing Sub string %i: %s\n", i, tempDynRow.col_list[i].c_str());
+        //}
+
         
         NewIt++;
         OldIt = NewIt;
