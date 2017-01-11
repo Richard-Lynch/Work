@@ -1,4 +1,4 @@
-#include <stdio.h>  // printf() etc.
+#include <stdio.h>  //fprintf(elogs, ) etc.
 #include <string.h> // strcpy(), strlen() etc.
 #include <math.h>
 #include <iostream>
@@ -26,7 +26,7 @@ int table::add_cli(int INDEX){
 
     //check if we're at the end of the report
     if(tempString.substr(1, 13)=="End of Report"){
-        printf("Reached end of report\n");
+       fprintf(elogs, "Reached end of report\n");
         return 0;
     }
 
@@ -92,7 +92,7 @@ int table::add_dyn(int INDEX){
      //check if we're at the end of the report
     if(tempString.substr(1, 13)=="End of Report"){
         //printf("failed.\n");
-        printf("Reached end of report\n");
+       fprintf(elogs, "Reached end of report\n");
         return 0;
     }
 
@@ -126,7 +126,7 @@ int table::add_dyn(int INDEX){
 
     tempDynRow.fill();
     dyn_row_list.push_back(tempDynRow);
-    printf("added.\n");
+   fprintf(elogs, "added.\n");
     return 1;
     //printf("Testing Dyn Row: %s\n\n",(dyn_row_list[index]).col_list[5].c_str());
 
@@ -168,15 +168,15 @@ int table::align(){
                 if(loops < dyn_rows){
                     swapped = 1;
                     (dyn_row_list[i]).row_swap(&dyn_row_list[j]);
-                    printf("Swapped %i with %i\n", i+1, j+1);
+                   fprintf(elogs, "Swapped %i with %i\n", i+1, j+1);
                 }
                 else{
-                    printf("Couldnt Swap %i, reached end of dyn\n", i+1);
+                   fprintf(elogs, "Couldnt Swap %i, reached end of dyn\n", i+1);
                 }
             }
     }
     if(swapped == 0){
-        printf("Nothing Swapped\n");
+       fprintf(elogs, "Nothing Swapped\n");
     }
     return swapped;
 }
@@ -204,62 +204,62 @@ int table::combine(){
 //-----------------------------------------------------------------
 
 void table::test_print(){
-    printf("Testing Rows: \n");
+   fprintf(elogs, "Testing Rows: \n");
     for(int i = 0; i<cli_row_list.size();i++){
-        printf("Testing Client Row %i: %s\n", i, (cli_row_list[i]).col_list[8].c_str());
+       fprintf(elogs, "Testing Client Row %i: %s\n", i, (cli_row_list[i]).col_list[8].c_str());
     }    
-    printf("\n");
+   fprintf(elogs, "\n");
     for(int i = 0; i<dyn_row_list.size(); i++){
-        printf("Testing Dyn Row %i: %s\n", i, (dyn_row_list[i]).col_list[5].c_str());
+       fprintf(elogs, "Testing Dyn Row %i: %s\n", i, (dyn_row_list[i]).col_list[5].c_str());
     } 
-    printf("\n");
+   fprintf(elogs, "\n");
 }
 //-----------------------------------------------------------------
 
 void table::print(int cliCol, int dynCol){
-    printf("Printing Rows: \n");
-    printf("Index  Client               Dynamic \n");
+   fprintf(elogs, "Printing Rows: \n");
+   fprintf(elogs, "Index  Client               Dynamic \n");
     for(int i = 0; i<cli_rows;i++){
-        printf("%i:     (%s)         (%s)\n", i+1, cli_row_list[i].col_list[cliCol].c_str(), dyn_row_list[i].col_list[dynCol].c_str());
+       fprintf(elogs, "%i:     (%s)         (%s)\n", i+1, cli_row_list[i].col_list[cliCol].c_str(), dyn_row_list[i].col_list[dynCol].c_str());
     }    
-    printf("\n");
+   fprintf(elogs, "\n");
 }
 //-----------------------------------------------------------------
 
 void table::print(int* cols_to_print, int* from_file, int number_cols){
-    printf("Printing Rows: \n");
+   fprintf(elogs, "Printing Rows: \n");
     string temp;
     for(int i = 0; i<max_rows;i++){
-        printf("%i: ", i+1);
+       fprintf(elogs, "%i: ", i+1);
         for(int j = 0; j<number_cols; j++){
             if(from_file[j] == 0){
                 temp =  cli_row_list[i].col_list[cols_to_print[j]];
             }else if(from_file[j] == 1){
                 temp = dyn_row_list[i].col_list[cols_to_print[j]];
             }else{
-                printf("ERROR!!!\n");
+               fprintf(elogs, "ERROR!!!\n");
             }
-            printf("%s ", temp.c_str());
+           fprintf(elogs, "%s ", temp.c_str());
         }
-        printf("\n");
+       fprintf(elogs, "\n");
     }    
-    printf("Finished Printing Rows\n");
+   fprintf(elogs, "Finished Printing Rows\n");
 }
 
 //-----------------------------------------------------------------
 
 void table::print_combined_row(int cols_to_print[], int number_cols){
-    printf("Printing combined Rows: \n");
+   fprintf(elogs, "Printing combined Rows: \n");
     string temp;
     for(int i = 0; i<max_rows; i++){
-        printf("%i: ", i+1);
+       fprintf(elogs, "%i: ", i+1);
         for(int j = 0; j<number_cols; j++){
             temp =  combined_row_list[i].col_list[cols_to_print[j]];
-            printf("%s ", temp.c_str());
+           fprintf(elogs, "%s ", temp.c_str());
         }
-        printf("\n");
+       fprintf(elogs, "\n");
     }    
-    printf("Finished Printing combined Rows\n");
+   fprintf(elogs, "Finished Printing combined Rows\n");
 }
 
 //-----------------------------------------------------------------
@@ -332,9 +332,9 @@ void table::output_dixons(){
 
     int totals_cols[] = {0,1,2};
 
-    printf("Outputting to file\n");
+   fprintf(elogs, "Outputting to file\n");
     output(c_print_cols, 20, "Dixons.csv", 0, totals_cols);
-    printf("Finished Outputting to file\n");
+   fprintf(elogs, "Finished Outputting to file\n");
 }
 
 void table::output_pen(){
@@ -353,31 +353,31 @@ void table::output_pen(){
 
     int totals_cols[] = {0,1,2};
 
-    printf("Outputting to file\n");
+   fprintf(elogs, "Outputting to file\n");
     output(c_print_cols, 10, "Penn.csv", 0, totals_cols);
-    printf("Finished Outputting to file\n");
+   fprintf(elogs, "Finished Outputting to file\n");
 }
 
 //-----------------------------------------------------------------
 
 // void table::output(int* cols_to_print, int* from_file, int number_cols){
-//     printf("Printing Rows: \n");
+//    fprintf(elogs, "Printing Rows: \n");
 //     string temp;
 //     for(int i = 0; i<max_rows;i++){
-//         printf("%i: ", i+1);
+//        fprintf(elogs, "%i: ", i+1);
 //         for(int j = 0; j<number_cols; j++){
 //             if(from_file[j] == 0){
 //                 temp =  cli_row_list[i].col_list[cols_to_print[j]];
 //             }else if(from_file[j] == 1){
 //                 temp = dyn_row_list[i].col_list[cols_to_print[j]];
 //             }else{
-//                 printf("ERROR!!!\n");
+//                fprintf(elogs, "ERROR!!!\n");
 //             }
-//             printf("%s ", temp.c_str());
+//            fprintf(elogs, "%s ", temp.c_str());
 //         }
-//         printf("\n");
+//        fprintf(elogs, "\n");
 //     }    
-//     printf("Finished Printing Rows\n");
+//    fprintf(elogs, "Finished Printing Rows\n");
 // }
 
 //-----------------------------------------------------------------
@@ -385,28 +385,29 @@ void table::output_pen(){
 table::table(int T, string Dynamic, string Client){
     cli_rows = dyn_rows = 0;
 
+    elogs = fopen("Error.txt", "w");
     //open the file streams
     sCli.open(Client);
     sDyn.open(Dynamic);
     //check they opened correcly
     if(!sCli.is_open()){
-        printf("Client Activity File did not open.\n");
+       fprintf(elogs, "Client Activity File did not open.\n");
         return;
     }
     if(!sDyn.is_open()){
-        printf("Dynamic Transatic File did not open.\n");
+       fprintf(elogs, "Dynamic Transatic File did not open.\n");
         return;
     }
     int end = 1;
     while(!sCli.eof()&& end == 1 ){
-        printf("adding client row %i\n",cli_rows);
+       fprintf(elogs, "adding client row %i\n",cli_rows);
         end = add_cli(cli_rows);
         cli_rows += end;
     }
 
     end = 1;
     while(!sDyn.eof()&& end == 1){
-        printf("adding dynamic row %i, ",dyn_rows);
+       fprintf(elogs, "adding dynamic row %i, ",dyn_rows);
         end = add_dyn(dyn_rows);
         dyn_rows += end;
     }
@@ -423,9 +424,9 @@ table::table(int T, string Dynamic, string Client){
     align();
     print(C_ID_Processed, D_Bag);
 
-    output_dixons();
+    //output_dixons();
 
-    //output_pen();
+    output_pen();
 
 }
 //-----------------------------------------------------------------

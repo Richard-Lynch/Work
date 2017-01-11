@@ -19,6 +19,7 @@ class table{
     int max_rows;
     int combined_rows;
     fstream sCli, sDyn;
+    FILE* elogs;
 
     //void test(int INDEX);
     int add_cli(int INDEX);
